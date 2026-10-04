@@ -1,7 +1,6 @@
 {
   "name": "@itslil/lil2-remark-gfm",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
   "description": "remark-gfm, rewritten in typed LilScript: GFM on the flat lil2 pipeline, same trees",
   "type": "module",
   "license": "MIT",
@@ -10,10 +9,33 @@
     "type": "git",
     "url": "git+https://github.com/yeargun/lil2-remark-gfm.git"
   },
+  "bugs": {
+    "url": "https://github.com/yeargun/lil2-remark-gfm/issues"
+  },
   "homepage": "https://yeargun.github.io/lil2-remark-gfm/",
+  "keywords": [
+    "remark",
+    "gfm",
+    "github",
+    "markdown",
+    "table",
+    "footnote",
+    "strikethrough",
+    "tasklist",
+    "lilscript",
+    "lil2",
+    "typed",
+    "fast"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
   "main": "./dist/remark-gfm.js",
+  "types": "./types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "convex": "./dist/remark-gfm.js",
       "deno": "./dist/remark-gfm.js",
       "edge-light": "./dist/remark-gfm.js",
@@ -22,8 +44,24 @@
       "workerd": "./dist/remark-gfm.js",
       "browser": "./dist/browser/remark-gfm.js",
       "default": "./dist/remark-gfm.js"
+    },
+    "./constants": {
+      "types": "./types/constants.d.ts",
+      "convex": "./dist/constants.js",
+      "deno": "./dist/constants.js",
+      "edge-light": "./dist/constants.js",
+      "react-native": "./dist/constants.js",
+      "worker": "./dist/constants.js",
+      "workerd": "./dist/constants.js",
+      "browser": "./dist/browser/constants.js",
+      "default": "./dist/constants.js"
     }
   },
+  "files": [
+    "dist/**/*.js",
+    "types",
+    "NOTICE.md"
+  ],
   "scripts": {
     "check:sources": "node scripts/shared-sources.mjs",
     "build:dev": "node scripts/build.mjs --dev",
