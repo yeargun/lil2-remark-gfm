@@ -1,0 +1,30 @@
+// lil2-remark-gfm: markdown with GFM (autolink literals, footnotes, strikethrough, tables, task lists) to
+// mdast and hast columns. Higher layers compile `gfm/gfm.lil` in instead.
+
+import { parseTree } from "./mdast/parse.lil";
+import { Tree } from "./mdast/tree.lil";
+import { FromMarkdown } from "./mdast/from-markdown.lil";
+import { Hast, keywordNames, propNames, tagNames } from "./hast/hast.lil";
+import { ToHast, toHast, toHastTree } from "./hast/to-hast.lil";
+import { gfmMdast, gfmSyntax } from "./gfm/gfm.lil";
+
+Tree gfmTree(string value, bool singleTilde) {
+  (func(FromMarkdown)->void)[] installers = [gfmMdast];
+  return parseTree(value, gfmSyntax(singleTilde), installers);
+}
+
+// The mdast columns, as lil2-mdast-util-from-markdown's `fromMarkdown` returns them.
+export JsValue fromMarkdown(string value, bool singleTilde) {
+  Tree t = gfmTree(value, singleTilde);
+  return [t.kind, t.flags, t.parent, t.firstChild, t.nextSibling, t.sOffset, t.eOffset, t.num, t.s1, t.s2, t.s3, t.identifier, t.label, t.lineStarts, t.identifiers, t.aux];
+}
+
+// The hast columns, as lil2-mdast-util-to-hast's `markdownToHast` returns them.
+export JsValue markdownToHast(string value, bool allowDangerousHtml) {
+  ToHast state = toHastTree(gfmTree(value, true), allowDangerousHtml);
+  int root = toHast(state);
+  Hast h = state.hast;
+  return [root, h.kind, h.parent, h.firstChild, h.nextSibling, h.tag, h.value, h.sOffset, h.eOffset, h.flags, h.meta, h.propHead, h.pProp, h.pKind, h.pStr, h.pNum, h.pNext, h.lineStarts, tagNames];
+}
+
+export { propNames, keywordNames };

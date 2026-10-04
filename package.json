@@ -1,0 +1,43 @@
+{
+  "name": "@itslil/lil2-remark-gfm",
+  "version": "0.0.0",
+  "private": true,
+  "description": "remark-gfm, rewritten in typed LilScript: GFM on the flat lil2 pipeline, same trees",
+  "type": "module",
+  "license": "MIT",
+  "author": "yeargun",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeargun/lil2-remark-gfm.git"
+  },
+  "homepage": "https://yeargun.github.io/lil2-remark-gfm/",
+  "main": "./dist/remark-gfm.js",
+  "exports": {
+    ".": {
+      "convex": "./dist/remark-gfm.js",
+      "deno": "./dist/remark-gfm.js",
+      "edge-light": "./dist/remark-gfm.js",
+      "react-native": "./dist/remark-gfm.js",
+      "worker": "./dist/remark-gfm.js",
+      "workerd": "./dist/remark-gfm.js",
+      "browser": "./dist/browser/remark-gfm.js",
+      "default": "./dist/remark-gfm.js"
+    }
+  },
+  "scripts": {
+    "check:sources": "node scripts/shared-sources.mjs",
+    "build:dev": "node scripts/build.mjs --dev",
+    "build": "node scripts/build.mjs",
+    "test": "npm run check:sources && node --test test/differential.test.mjs test/browser.test.mjs"
+  },
+  "devDependencies": {
+    "character-entities": "^2.0.2",
+    "commonmark.json": "^0.31.0",
+    "mdast-util-from-markdown": "^2.0.3",
+    "mdast-util-gfm": "^3.1.0",
+    "mdast-util-to-hast": "^13.2.1",
+    "micromark": "^4.0.2",
+    "micromark-extension-gfm": "^3.0.0",
+    "playwright-core": "^1.62.0"
+  }
+}
